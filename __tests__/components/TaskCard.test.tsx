@@ -1,0 +1,55 @@
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react-native';
+import { TaskCard } from '../../src/components/TaskCard';
+
+const mockTask = {
+  id: '1',
+  title: 'Estudiar React Native',
+  status: 'pending' as const,
+};
+
+const mockOnDelete = jest.fn();
+
+describe('TaskCard', () => {
+  beforeEach(() => {
+    mockOnDelete.mockClear();
+  });
+
+  it('muestra el título de la tarea', async () => {
+    await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
+    expect(screen.getByText('Estudiar React Native')).toBeTruthy();
+  });
+
+  it('muestra el estado "Pendiente" para tareas pendientes', async () => {
+    await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
+    expect(screen.getByText('○ Pendiente')).toBeTruthy();
+  });
+
+  it('muestra el estado "Completada" para tareas completadas', async () => {
+    const completedTask = { ...mockTask, status: 'completed' as const };
+    await render(<TaskCard task={completedTask} onDelete={mockOnDelete} />);
+    expect(screen.getByText('✓ Completada')).toBeTruthy();
+  });
+
+  it('muestra el diálogo y elimina únicamente después de confirmar', async () => {
+    await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
+    await fireEvent.press(screen.getByText('Eliminar'));
+
+    expect(screen.getByText('Eliminar tarea')).toBeTruthy();
+    expect(screen.getByText('¿Deseas eliminar “Estudiar React Native”?')).toBeTruthy();
+    expect(mockOnDelete).not.toHaveBeenCalled();
+
+    await fireEvent.press(screen.getByText('Sí, eliminar'));
+    expect(mockOnDelete).toHaveBeenCalledWith('1');
+    expect(mockOnDelete).toHaveBeenCalledTimes(1);
+  });
+
+  it('cierra el diálogo sin eliminar al presionar "Cancelar"', async () => {
+    await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
+    await fireEvent.press(screen.getByText('Eliminar'));
+    await fireEvent.press(screen.getByText('Cancelar'));
+
+    expect(screen.queryByText('Eliminar tarea')).toBeNull();
+    expect(mockOnDelete).not.toHaveBeenCalled();
+  });
+});
