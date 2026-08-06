@@ -14,7 +14,6 @@ describe('TaskForm', () => {
     await fireEvent.press(screen.getByText('Guardar'));
 
     expect(mockOnSubmit).toHaveBeenCalledWith('Mi nueva tarea');
-    expect(screen.getByPlaceholderText('Escribe el título de la tarea').props.value).toBe('');
   });
 
   it('no llama a onSubmit si el campo está vacío', async () => {

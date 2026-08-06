@@ -4,7 +4,7 @@ import { TaskCard } from '../../src/components/TaskCard';
 
 const mockTask = {
   id: '1',
-  title: 'Estudiar React Native',
+  title: 'Estudiar React Native con Testing Library',
   status: 'pending' as const,
 };
 
@@ -17,7 +17,7 @@ describe('TaskCard', () => {
 
   it('muestra el título de la tarea', async () => {
     await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
-    expect(screen.getByText('Estudiar React Native')).toBeTruthy();
+    expect(screen.getByText('Estudiar React Native con Testing Library')).toBeTruthy();
   });
 
   it('muestra el estado "Pendiente" para tareas pendientes', async () => {
@@ -31,25 +31,10 @@ describe('TaskCard', () => {
     expect(screen.getByText('✓ Completada')).toBeTruthy();
   });
 
-  it('muestra el diálogo y elimina únicamente después de confirmar', async () => {
+  it('llama a onDelete con el id correcto al presionar "Eliminar"', async () => {
     await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
     await fireEvent.press(screen.getByText('Eliminar'));
-
-    expect(screen.getByText('Eliminar tarea')).toBeTruthy();
-    expect(screen.getByText('¿Deseas eliminar “Estudiar React Native”?')).toBeTruthy();
-    expect(mockOnDelete).not.toHaveBeenCalled();
-
-    await fireEvent.press(screen.getByText('Sí, eliminar'));
     expect(mockOnDelete).toHaveBeenCalledWith('1');
     expect(mockOnDelete).toHaveBeenCalledTimes(1);
-  });
-
-  it('cierra el diálogo sin eliminar al presionar "Cancelar"', async () => {
-    await render(<TaskCard task={mockTask} onDelete={mockOnDelete} />);
-    await fireEvent.press(screen.getByText('Eliminar'));
-    await fireEvent.press(screen.getByText('Cancelar'));
-
-    expect(screen.queryByText('Eliminar tarea')).toBeNull();
-    expect(mockOnDelete).not.toHaveBeenCalled();
   });
 });

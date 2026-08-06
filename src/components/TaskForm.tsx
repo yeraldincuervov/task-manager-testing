@@ -9,8 +9,10 @@ export function TaskForm({ onSubmit }: TaskFormProps) {
   const [title, setTitle] = useState('');
 
   const handleSubmit = async () => {
-    if (!title.trim()) return;
-    await onSubmit(title.trim());
+    const normalizedTitle = title.trim();
+    if (!normalizedTitle) return;
+
+    await onSubmit(normalizedTitle);
     setTitle('');
   };
 

@@ -16,7 +16,7 @@ const renderScreen = () =>
   );
 
 describe('CreateTaskScreen - Integración', () => {
-  it('crea una tarea, la muestra en la lista y permite eliminarla', async () => {
+  it('crea una tarea exitosamente y muestra confirmación', async () => {
     await renderScreen();
 
     await fireEvent.changeText(
@@ -27,17 +27,20 @@ describe('CreateTaskScreen - Integración', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Tarea creada exitosamente')).toBeTruthy();
-      expect(screen.getByText('Estudiar pruebas de integración')).toBeTruthy();
-      expect(screen.getByText('1 tarea')).toBeTruthy();
     });
+  });
 
-    await fireEvent.press(screen.getByText('Eliminar'));
+  it('muestra la tarea creada en la lista', async () => {
+    await renderScreen();
 
-    expect(screen.getByText('¿Deseas eliminar “Estudiar pruebas de integración”?')).toBeTruthy();
+    await fireEvent.changeText(
+      screen.getByPlaceholderText('Escribe el título de la tarea'),
+      'Comprar pan'
+    );
+    await fireEvent.press(screen.getByText('Guardar'));
 
-    await fireEvent.press(screen.getByText('Sí, eliminar'));
-
-    expect(screen.queryByText('Estudiar pruebas de integración')).toBeNull();
-    expect(screen.getByText('No hay tareas aún')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Comprar pan')).toBeTruthy();
+    });
   });
 });

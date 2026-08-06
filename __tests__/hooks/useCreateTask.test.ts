@@ -1,90 +1,84 @@
-import { act, renderHook } from '@testing-library/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { renderHook, act, waitFor } from '@testing-library/react-native';
 import { useCreateTask } from '../../src/hooks/useCreateTask';
-import { createTask } from '../../src/services/taskService';
-import { Task } from '../../src/types';
 
-// Se aísla el servicio para probar únicamente las transiciones de estado del hook,
-// sin depender de una API ni de la implementación que genera la tarea.
-jest.mock('../../src/services/taskService', () => ({
-  createTask: jest.fn(),
-}));
-
-const mockCreateTask = createTask as jest.MockedFunction<typeof createTask>;
+beforeEach(async () => {
+  await AsyncStorage.clear();
+});
 
 describe('useCreateTask', () => {
-  beforeEach(() => {
-    mockCreateTask.mockReset();
-  });
-
-  it('inicia en idle sin invocar el servicio', async () => {
+  it('crea la tarea', async () => {
     const { result } = await renderHook(() => useCreateTask());
-
-    expect(result.current.status).toBe('idle');
-    expect(mockCreateTask).not.toHaveBeenCalled();
-  });
-
-  it('cambia de idle a loading mientras la creación está pendiente', async () => {
-    let resolveRequest!: (task: Task) => void;
-    const pendingRequest = new Promise<Task>((resolve) => {
-      resolveRequest = resolve;
-    });
-    mockCreateTask.mockReturnValue(pendingRequest);
-    const { result } = await renderHook(() => useCreateTask());
-    let submitRequest!: Promise<Task | null>;
-
-    await act(() => {
-      submitRequest = result.current.submit('Tarea pendiente');
-    });
-
-    expect(result.current.status).toBe('loading');
-    expect(mockCreateTask).toHaveBeenCalledWith('Tarea pendiente');
 
     await act(async () => {
-      resolveRequest({ id: '1', title: 'Tarea pendiente', status: 'pending' });
-      await submitRequest;
+      await result.current.submit('Tarea 1');
     });
 
+    expect(result.current.tasks).toHaveLength(1);
+    expect(result.current.tasks[0].title).toBe('Tarea 1');
     expect(result.current.status).toBe('success');
   });
 
-  it('cambia de loading a success y retorna la tarea creada', async () => {
-    const createdTask: Task = { id: '2', title: 'Tarea creada', status: 'pending' };
-    mockCreateTask.mockResolvedValue(createdTask);
+  it('alterna el estado de una tarea entre pendiente y completada', async () => {
     const { result } = await renderHook(() => useCreateTask());
-    let returnedTask: Task | null = null;
 
     await act(async () => {
-      returnedTask = await result.current.submit('Tarea creada');
+      await result.current.submit('Tarea 1');
     });
-
-    expect(mockCreateTask).toHaveBeenCalledTimes(1);
-    expect(result.current.status).toBe('success');
-    expect(returnedTask).toEqual(createdTask);
-  });
-
-  it('cambia de loading a error y retorna null cuando el servicio falla', async () => {
-    let rejectRequest!: (error: Error) => void;
-    const pendingRequest = new Promise<Task>((_resolve, reject) => {
-      rejectRequest = reject;
-    });
-    mockCreateTask.mockReturnValue(pendingRequest);
-    const { result } = await renderHook(() => useCreateTask());
-    let submitRequest!: Promise<Task | null>;
-    let returnedTask: Task | null | undefined;
+    const id = result.current.tasks[0].id;
+    expect(result.current.tasks[0].status).toBe('pending');
 
     await act(() => {
-      submitRequest = result.current.submit('Tarea fallida');
+      result.current.toggleTask(id);
     });
+    expect(result.current.tasks[0].status).toBe('completed');
 
-    expect(result.current.status).toBe('loading');
+    await act(() => {
+      result.current.toggleTask(id);
+    });
+    expect(result.current.tasks[0].status).toBe('pending');
+  });
 
+  it('persiste las tareas y las recarga en un nuevo montaje', async () => {
+    const first = await renderHook(() => useCreateTask());
     await act(async () => {
-      rejectRequest(new Error('Servicio no disponible'));
-      returnedTask = await submitRequest;
+      await first.result.current.submit('Persistente');
     });
+    await waitFor(() =>
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        'tasks',
+        expect.stringContaining('Persistente')
+      )
+    );
 
-    expect(mockCreateTask).toHaveBeenCalledWith('Tarea fallida');
-    expect(result.current.status).toBe('error');
-    expect(returnedTask).toBeNull();
+    const second = await renderHook(() => useCreateTask());
+    await waitFor(() => expect(second.result.current.tasks).toHaveLength(1));
+    expect(second.result.current.tasks[0].title).toBe('Persistente');
+  });
+
+  it('guarda el estado tras marcar completada y tras eliminar', async () => {
+    const first = await renderHook(() => useCreateTask());
+    await act(async () => {
+      await first.result.current.submit('Cambiante');
+    });
+    const id = first.result.current.tasks[0].id;
+
+    await act(() => {
+      first.result.current.toggleTask(id);
+    });
+    await waitFor(() =>
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith('tasks', expect.stringContaining('completed'))
+    );
+
+    const second = await renderHook(() => useCreateTask());
+    await waitFor(() => expect(second.result.current.tasks[0].status).toBe('completed'));
+
+    await act(() => {
+      second.result.current.removeTask(id);
+    });
+    await waitFor(() => expect(AsyncStorage.setItem).toHaveBeenCalledWith('tasks', '[]'));
+
+    const third = await renderHook(() => useCreateTask());
+    await waitFor(() => expect(third.result.current.tasks).toHaveLength(0));
   });
 });

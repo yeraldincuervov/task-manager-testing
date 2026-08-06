@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1785547180371" clover="3.2.0">
-  <project timestamp="1785547180371" name="All files">
-    <metrics statements="75" coveredstatements="75" conditionals="35" coveredconditionals="33" methods="32" coveredmethods="31" elements="142" coveredelements="139" complexity="0" loc="75" ncloc="75" packages="7" files="13" classes="13"/>
+<coverage generated="1785977349108" clover="3.2.0">
+  <project timestamp="1785977349108" name="All files">
+    <metrics statements="146" coveredstatements="136" conditionals="80" coveredconditionals="73" methods="81" coveredmethods="69" elements="307" coveredelements="278" complexity="0" loc="146" ncloc="146" packages="7" files="21" classes="21"/>
     <package name="src">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="types.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\types.ts">
@@ -9,42 +9,72 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="20" coveredstatements="20" conditionals="11" coveredconditionals="11" methods="11" coveredmethods="10"/>
+      <metrics statements="35" coveredstatements="34" conditionals="32" coveredconditionals="28" methods="27" coveredmethods="23"/>
       <file name="ConfirmDeleteDialog.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\ConfirmDeleteDialog.tsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="17" count="21" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="17" count="13" type="stmt"/>
+      </file>
+      <file name="LabeledInput.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\LabeledInput.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="13" count="400" type="stmt"/>
+      </file>
+      <file name="PaymentInfoSection.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\PaymentInfoSection.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="19" count="40" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+      </file>
+      <file name="ShippingInfoSection.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\ShippingInfoSection.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="18" count="40" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+      </file>
+      <file name="StatusBadge.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\StatusBadge.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
       <file name="TaskCard.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\TaskCard.tsx">
-        <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
-        <line num="12" count="17" type="stmt"/>
-        <line num="13" count="17" type="stmt"/>
-        <line num="15" count="17" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="20" count="17" type="stmt"/>
-        <line num="28" count="3" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <metrics statements="4" coveredstatements="3" conditionals="7" coveredconditionals="7" methods="4" coveredmethods="2"/>
+        <line num="12" count="14" type="stmt"/>
+        <line num="13" count="14" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
       <file name="TaskForm.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\TaskForm.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="9" count="14" type="stmt"/>
-        <line num="11" count="14" type="stmt"/>
-        <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="17" count="14" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="11" count="16" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="19" count="16" type="stmt"/>
       </file>
       <file name="TaskList.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\TaskList.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="3"/>
-        <line num="12" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="23" count="7" type="stmt"/>
-        <line num="24" count="4" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
+        <line num="13" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="26" count="12" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+      </file>
+      <file name="UserInfoSection.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\components\UserInfoSection.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="18" count="40" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.hooks">
-      <metrics statements="28" coveredstatements="28" conditionals="4" coveredconditionals="4" methods="14" coveredmethods="14"/>
+      <metrics statements="40" coveredstatements="40" conditionals="12" coveredconditionals="11" methods="27" coveredmethods="25"/>
       <file name="useCounter.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\hooks\useCounter.ts">
         <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="6" coveredmethods="6"/>
         <line num="4" count="9" type="stmt"/>
@@ -54,37 +84,60 @@
         <line num="10" count="9" type="stmt"/>
       </file>
       <file name="useCreateTask.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\hooks\useCreateTask.ts">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="5" count="12" type="stmt"/>
-        <line num="7" count="12" type="stmt"/>
-        <line num="8" count="4" type="stmt"/>
-        <line num="9" count="4" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="19" count="12" type="stmt"/>
+        <metrics statements="22" coveredstatements="22" conditionals="8" coveredconditionals="7" methods="15" coveredmethods="13"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="8" count="23" type="stmt"/>
+        <line num="9" count="23" type="stmt"/>
+        <line num="10" count="23" type="stmt"/>
+        <line num="12" count="23" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="15" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="9" type="stmt"/>
+        <line num="23" count="23" type="stmt"/>
+        <line num="25" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="14" type="stmt"/>
+        <line num="29" count="23" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="40" count="23" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="23" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="52" count="23" type="stmt"/>
       </file>
       <file name="useTaskList.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\hooks\useTaskList.ts">
         <metrics statements="13" coveredstatements="13" conditionals="3" coveredconditionals="3" methods="6" coveredmethods="6"/>
-        <line num="5" count="13" type="stmt"/>
-        <line num="6" count="13" type="stmt"/>
-        <line num="8" count="13" type="stmt"/>
-        <line num="9" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="10" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="22" count="13" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="26" count="13" type="stmt"/>
-        <line num="28" count="13" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="26" count="10" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
       </file>
     </package>
     <package name="src.schemas">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="checkoutSchema.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\schemas\checkoutSchema.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="21" count="33" type="stmt"/>
+        <line num="22" count="33" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="26" type="stmt"/>
+        <line num="24" count="36" type="stmt"/>
+      </file>
       <file name="taskSchema.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\schemas\taskSchema.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
@@ -92,38 +145,80 @@
       </file>
     </package>
     <package name="src.screens">
-      <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <metrics statements="42" coveredstatements="33" conditionals="18" coveredconditionals="16" methods="20" coveredmethods="14"/>
+      <file name="CheckoutScreen.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\screens\CheckoutScreen.tsx">
+        <metrics statements="24" coveredstatements="23" conditionals="10" coveredconditionals="10" methods="12" coveredmethods="11"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="41" type="stmt"/>
+        <line num="18" count="40" type="stmt"/>
+        <line num="19" count="40" type="stmt"/>
+        <line num="20" count="40" type="stmt"/>
+        <line num="21" count="40" type="stmt"/>
+        <line num="22" count="40" type="stmt"/>
+        <line num="23" count="40" type="stmt"/>
+        <line num="25" count="40" type="stmt"/>
+        <line num="26" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="40" type="stmt"/>
+        <line num="49" count="10" type="stmt"/>
+        <line num="54" count="9" type="stmt"/>
+        <line num="59" count="12" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+      </file>
       <file name="CreateTaskScreen.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\screens\CreateTaskScreen.tsx">
-        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="21" count="3" type="stmt"/>
+        <metrics statements="14" coveredstatements="10" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="3"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="39" count="15" type="stmt"/>
+        <line num="40" count="15" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="0" type="stmt"/>
+      </file>
+      <file name="HomeScreen.tsx" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\screens\HomeScreen.tsx">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
       <file name="taskService.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\services\taskService.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="3" count="2" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="17" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.utils">
       <metrics statements="12" coveredstatements="12" conditionals="12" coveredconditionals="12" methods="3" coveredmethods="3"/>
       <file name="filterTasks.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\utils\filterTasks.ts">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="8" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="12" type="cond" truecount="2" falsecount="0"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="11" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="10" type="cond" truecount="2" falsecount="0"/>
         <line num="12" count="10" type="stmt"/>
       </file>
       <file name="validateTask.ts" path="C:\Users\yeral\OneDrive\Documentos\Especializacion Requerimientos\PruebasCalidadSoftwareMovil\task-manager-testing\src\utils\validateTask.ts">
