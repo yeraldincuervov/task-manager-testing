@@ -8,9 +8,10 @@ Repositorio: [github.com/yeraldincuervov/task-manager-testing](https://github.co
 
 La documentación de cada entrega se mantiene por separado para facilitar su revisión.
 
-| Actividad | Alcance | Documentación |
-|---|---|---|
-| Actividad 2 | Ampliación de pruebas unitarias, hooks, componentes y servicios | [Ver Actividad 2](docs/ACTIVIDAD-2.md) |
+| Actividad | Alcance | Estado | Documentación |
+|---|---|---|---|
+| Actividad 2 | Ampliación de pruebas unitarias, hooks, componentes y servicios | Completada | [Ver Actividad 2](docs/ACTIVIDAD-2.md) |
+| Actividad 3 | Pruebas de integración, E2E y accesibilidad | Completada | [Ver Actividad 3](docs/ACTIVIDAD-3.md) |
 
 ## Documentación complementaria
 
@@ -57,6 +58,9 @@ El reporte HTML queda disponible en [coverage/lcov-report/index.html](coverage/l
 ## Estado actual
 
 ```text
-Test Suites: 19 passed, 19 total
-Tests:       100 passed, 100 total
+Test Suites: 21 passed, 21 total
+Tests:       108 passed, 108 total
+Maestro E2E: 2 ejecuciones satisfactorias
 ```
+
+La Actividad 3 incluye cuatro capturas reales, metadatos y registros de las dos ejecuciones realizadas sobre un celular Android. Las evidencias están disponibles en [docs/evidencias](docs/evidencias/README.md).

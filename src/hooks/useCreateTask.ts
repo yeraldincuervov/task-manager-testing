@@ -1,24 +1,50 @@
 import { useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Task } from '../types';
+import { createTask, fetchTasks } from '../services/taskService';
 
 const STORAGE_KEY = 'tasks';
 
-export function useCreateTask() {
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+interface UseCreateTaskOptions {
+  syncWithApi?: boolean;
+}
+
+export function useCreateTask({ syncWithApi = false }: UseCreateTaskOptions = {}) {
+  const [status, setStatus] = useState<'loading' | 'idle' | 'success' | 'error'>(
+    syncWithApi ? 'loading' : 'idle'
+  );
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const loaded = useRef(false);
 
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY)
-      .then((raw) => {
-        if (raw) setTasks(JSON.parse(raw));
+    let active = true;
+
+    const loadTasks = syncWithApi
+      ? Promise.all([AsyncStorage.getItem(STORAGE_KEY), fetchTasks()])
+      : Promise.all([AsyncStorage.getItem(STORAGE_KEY), Promise.resolve<Task[]>([])]);
+
+    loadTasks
+      .then(([raw, remoteTasks]) => {
+        if (!active) return;
+
+        const cachedTasks = raw ? (JSON.parse(raw) as Task[]) : null;
+        setTasks(syncWithApi ? (cachedTasks ?? remoteTasks) : (cachedTasks ?? []));
+        setStatus('idle');
       })
-      .catch(() => {})
+      .catch(() => {
+        if (!active) return;
+        setErrorMessage('No fue posible cargar las tareas');
+        setStatus('error');
+      })
       .finally(() => {
         loaded.current = true;
       });
-  }, []);
+
+    return () => {
+      active = false;
+    };
+  }, [syncWithApi]);
 
   useEffect(() => {
     // ponytail: no guardar antes de terminar de cargar, si no el [] inicial pisa lo guardado
@@ -27,14 +53,24 @@ export function useCreateTask() {
   }, [tasks]);
 
   const submit = async (title: string) => {
-    const task: Task = {
-      id: Date.now().toString(),
-      title: title,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-    };
-    setTasks((prev) => [...prev, task]);
-    setStatus('success');
+    setStatus('loading');
+    setErrorMessage(null);
+
+    try {
+      const task = syncWithApi
+        ? await createTask(title)
+        : {
+            id: Date.now().toString(),
+            title,
+            status: 'pending' as const,
+            createdAt: new Date().toISOString(),
+          };
+      setTasks((prev) => [...prev, task]);
+      setStatus('success');
+    } catch {
+      setErrorMessage('No fue posible crear la tarea');
+      setStatus('error');
+    }
   };
 
   const removeTask = (id: string) => {
@@ -49,5 +85,5 @@ export function useCreateTask() {
     );
   };
 
-  return { status, tasks, submit, removeTask, toggleTask };
+  return { status, tasks, errorMessage, submit, removeTask, toggleTask };
 }

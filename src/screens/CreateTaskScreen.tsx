@@ -13,8 +13,14 @@ const FILTERS: { value: FilterStatus; label: string }[] = [
   { value: 'completed', label: 'Completadas' },
 ];
 
-export function CreateTaskScreen() {
-  const { status, tasks, submit, removeTask, toggleTask } = useCreateTask();
+interface CreateTaskScreenProps {
+  syncWithApi?: boolean;
+}
+
+export function CreateTaskScreen({ syncWithApi = false }: CreateTaskScreenProps) {
+  const { status, tasks, errorMessage, submit, removeTask, toggleTask } = useCreateTask({
+    syncWithApi,
+  });
   const insets = useSafeAreaInsets();
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
   const [filter, setFilter] = useState<FilterStatus>('all');
@@ -29,9 +35,25 @@ export function CreateTaskScreen() {
     >
       <Text className="text-2xl font-bold text-gray-900">Nueva tarea</Text>
       <TaskForm onSubmit={submit} />
+      {status === 'loading' && (
+        <Text accessibilityRole="alert" className="text-sm font-medium text-blue-700">
+          Cargando tareas...
+        </Text>
+      )}
       {status === 'success' && (
-        <Text className="rounded-lg bg-green-100 px-4 py-3 text-sm font-medium text-green-800">
+        <Text
+          accessibilityRole="alert"
+          className="rounded-lg bg-green-100 px-4 py-3 text-sm font-medium text-green-800"
+        >
           Tarea creada exitosamente
+        </Text>
+      )}
+      {status === 'error' && errorMessage && (
+        <Text
+          accessibilityRole="alert"
+          className="rounded-lg bg-red-100 px-4 py-3 text-sm font-medium text-red-800"
+        >
+          {errorMessage}
         </Text>
       )}
       <View className="flex-row gap-2">

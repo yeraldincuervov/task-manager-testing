@@ -18,7 +18,7 @@ export function TaskCard({ task, onDelete, onToggle = () => {} }: TaskCardProps)
         accessibilityRole="button"
         accessibilityLabel={`Marcar tarea ${task.title} como ${done ? 'pendiente' : 'completada'}`}
       >
-        <Text className={`mt-1 text-sm ${done ? 'text-green-600' : 'text-gray-500'}`}>
+        <Text className={`mt-1 text-sm ${done ? 'text-green-700' : 'text-gray-500'}`}>
           {done ? '✓ Completada' : '○ Pendiente'}
         </Text>
       </Pressable>
