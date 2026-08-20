@@ -1,0 +1,16 @@
+Actividad 4 - Medición de arranque en frío
+Fecha: 2026-08-20
+Dispositivo: Pixel 10 virtual, Android 16, API 36, x86_64
+Aplicación: com.taskmanager.app, compilación EAS preview 91c78de9-0a07-4d9c-94e9-6b6d74a38c1f
+Comando: adb shell am start -W -S -n com.taskmanager.app/.MainActivity
+
+Iteración 1: TotalTime 441 ms, WaitTime 444 ms
+Iteración 2: TotalTime 381 ms, WaitTime 389 ms
+Iteración 3: TotalTime 413 ms, WaitTime 417 ms
+Iteración 4: TotalTime 354 ms, WaitTime 356 ms
+Iteración 5: TotalTime 412 ms, WaitTime 416 ms
+
+TotalTime promedio: 400.2 ms
+TotalTime mínimo: 354 ms
+TotalTime máximo: 441 ms
+Todas las ejecuciones informaron LaunchState: COLD y Status: ok.

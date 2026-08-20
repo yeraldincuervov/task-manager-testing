@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Task } from '../types';
 import { createTask, fetchTasks } from '../services/taskService';
+import { TaskListSchema } from '../schemas/taskSchema';
 
 const STORAGE_KEY = 'tasks';
 
@@ -28,7 +29,8 @@ export function useCreateTask({ syncWithApi = false }: UseCreateTaskOptions = {}
       .then(([raw, remoteTasks]) => {
         if (!active) return;
 
-        const cachedTasks = raw ? (JSON.parse(raw) as Task[]) : null;
+        const cachedResult = raw ? TaskListSchema.safeParse(JSON.parse(raw)) : null;
+        const cachedTasks = cachedResult?.success ? cachedResult.data : null;
         setTasks(syncWithApi ? (cachedTasks ?? remoteTasks) : (cachedTasks ?? []));
         setStatus('idle');
       })

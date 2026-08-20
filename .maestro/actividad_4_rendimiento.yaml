@@ -1,0 +1,34 @@
+appId: com.taskmanager.app
+---
+# Recorrido determinista usado por Flashlight para comparar varias iteraciones.
+- launchApp:
+    clearState: true
+- assertVisible: "Task Manager"
+- tapOn: "Flujo Todo List"
+- assertVisible: "Nueva tarea"
+- assertVisible: "No hay tareas aún"
+
+- tapOn:
+    id: "input-titulo"
+- inputText: "Rendimiento A4 Uno"
+- tapOn: "Guardar"
+- assertVisible: "Rendimiento A4 Uno"
+
+- tapOn:
+    id: "input-titulo"
+- inputText: "Rendimiento A4 Dos"
+- tapOn: "Guardar"
+
+- tapOn:
+    id: "input-titulo"
+- inputText: "Rendimiento A4 Tres"
+- tapOn: "Guardar"
+- assertVisible: "3 tareas"
+
+- tapOn: "Marcar tarea Rendimiento A4 Uno como completada"
+- tapOn: "Completadas"
+- assertVisible: "Rendimiento A4 Uno"
+- assertNotVisible: "Rendimiento A4 Dos"
+- tapOn: "Todas"
+- assertVisible: "3 tareas"
+- assertVisible: "Rendimiento A4 Uno"

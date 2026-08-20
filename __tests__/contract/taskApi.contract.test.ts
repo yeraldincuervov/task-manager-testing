@@ -1,30 +1,65 @@
-import { TaskSchema, TaskListSchema } from '../../src/schemas/taskSchema';
+import { http, HttpResponse } from 'msw';
+import { server } from '../../src/mocks/server';
+import { createTask, fetchTasks } from '../../src/services/taskService';
+
+const API_URL = 'https://api.taskmanager.com';
 
 describe('API Contract - Tasks', () => {
-  it('la respuesta de GET /tasks cumple con el esquema esperado', () => {
-    const apiResponse = [
+  it('acepta una respuesta válida de GET /tasks', async () => {
+    server.use(
+      http.get(`${API_URL}/tasks`, () =>
+        HttpResponse.json([
+          { id: '1', title: 'Tarea 1', status: 'pending' },
+          {
+            id: '2',
+            title: 'Tarea 2',
+            status: 'completed',
+            createdAt: '2026-08-20T12:00:00.000Z',
+          },
+        ])
+      )
+    );
+
+    await expect(fetchTasks()).resolves.toEqual([
       { id: '1', title: 'Tarea 1', status: 'pending' },
-      { id: '2', title: 'Tarea 2', status: 'completed' },
-    ];
-    const result = TaskListSchema.safeParse(apiResponse);
-    expect(result.success).toBe(true);
+      {
+        id: '2',
+        title: 'Tarea 2',
+        status: 'completed',
+        createdAt: '2026-08-20T12:00:00.000Z',
+      },
+    ]);
   });
 
-  it('detecta cuando la API devuelve un campo con tipo incorrecto', () => {
-    const invalidResponse = { id: 123, title: 'Test', status: 'pending' };
-    const result = TaskSchema.safeParse(invalidResponse);
-    expect(result.success).toBe(false);
+  it('rechaza una respuesta inválida de GET /tasks', async () => {
+    server.use(
+      http.get(`${API_URL}/tasks`, () =>
+        HttpResponse.json([{ id: 123, title: 'Tarea inválida', status: 'pending' }])
+      )
+    );
+
+    await expect(fetchTasks()).rejects.toThrow(
+      'La respuesta de GET /tasks no cumple el contrato esperado'
+    );
   });
 
-  it('detecta cuando la API omite un campo requerido', () => {
-    const incompleteResponse = { id: '1', status: 'pending' };
-    const result = TaskSchema.safeParse(incompleteResponse);
-    expect(result.success).toBe(false);
+  it('acepta una respuesta válida de POST /tasks', async () => {
+    await expect(createTask('Contrato válido')).resolves.toMatchObject({
+      id: expect.any(String),
+      title: 'Contrato válido',
+      status: 'pending',
+    });
   });
 
-  it('detecta cuando la API envía un status inválido', () => {
-    const invalidStatus = { id: '1', title: 'Test', status: 'archived' };
-    const result = TaskSchema.safeParse(invalidStatus);
-    expect(result.success).toBe(false);
+  it('rechaza una respuesta inválida de POST /tasks', async () => {
+    server.use(
+      http.post(`${API_URL}/tasks`, () =>
+        HttpResponse.json({ id: '1', title: 'Sin estado' }, { status: 201 })
+      )
+    );
+
+    await expect(createTask('Sin estado')).rejects.toThrow(
+      'La respuesta de POST /tasks no cumple el contrato esperado'
+    );
   });
 });

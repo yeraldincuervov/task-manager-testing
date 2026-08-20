@@ -1,30 +1,41 @@
-name: Test Suite
+name: Pruebas y cobertura
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del código
+      - name: Descargar código
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22.14.0'
           cache: 'npm'
 
       - name: Instalar dependencias
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Verificar tipos
         run: npx tsc --noEmit
 
+      - name: Verificar accesibilidad estática
+        run: npm run lint:a11y
+
       - name: Ejecutar pruebas con cobertura
-        run: npx jest --coverage --ci
+        run: npm run test:coverage -- --ci --runInBand
+
+      - name: Publicar reporte de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-cobertura
+          path: coverage/
+          if-no-files-found: warn
+          retention-days: 14

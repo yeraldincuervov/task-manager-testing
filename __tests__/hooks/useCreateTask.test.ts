@@ -56,6 +56,18 @@ describe('useCreateTask', () => {
     expect(second.result.current.tasks[0].title).toBe('Persistente');
   });
 
+  it('ignora un caché que no cumple el contrato de tareas', async () => {
+    await AsyncStorage.setItem(
+      'tasks',
+      JSON.stringify([{ id: 123, title: 'Dato manipulado', status: 'pending' }])
+    );
+
+    const { result } = await renderHook(() => useCreateTask());
+
+    await waitFor(() => expect(result.current.status).toBe('idle'));
+    expect(result.current.tasks).toEqual([]);
+  });
+
   it('guarda el estado tras marcar completada y tras eliminar', async () => {
     const first = await renderHook(() => useCreateTask());
     await act(async () => {
