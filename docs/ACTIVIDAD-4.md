@@ -139,7 +139,9 @@ El workflow [`.github/workflows/tests.yml`](../.github/workflows/tests.yml) se e
 
 Jest conserva el umbral global mínimo del 70 % para branches, functions, lines y statements. Si cualquier indicador queda por debajo, Jest retorna un código de error y el pipeline falla.
 
-La misma secuencia se reprodujo localmente con éxito. La evidencia visual de GitHub Actions debe agregarse como `docs/evidencias/actividad-4/pipeline-exitoso.png` después de subir estos cambios; no se inventó una captura local porque el requisito exige una ejecución real en GitHub.
+La misma secuencia se reprodujo localmente y posteriormente se ejecutó en GitHub Actions mediante un `push` a `main`. La ejecución `Completar Actividad 4 de pruebas y calidad #5` terminó con estado **Success** en 1 min 5 s, aprobó todos los pasos y publicó el artefacto `reporte-cobertura`.
+
+Las evidencias muestran el [resumen de la ejecución](evidencias/actividad-4/pipeline-exitoso-summary.png), los [pasos aprobados](evidencias/actividad-4/pipeline-exitoso-steps.png) y el [detalle de las 21 suites, 109 pruebas y cobertura](evidencias/actividad-4/pipeline-exitoso-step-test-coverage.png). El inventario completo se encuentra en [`docs/evidencias/actividad-4/README.md`](evidencias/actividad-4/README.md).
 
 ## 5. Compatibilidad
 
